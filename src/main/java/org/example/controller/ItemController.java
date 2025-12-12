@@ -1,7 +1,7 @@
 package org.example.controller;
 
-import edu.icet.service.ItemService;
 import org.example.Model.DTO.ItemDTO;
+import org.example.Service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
