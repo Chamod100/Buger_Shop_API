@@ -1,8 +1,8 @@
 package org.example.Service;
 
-import edu.icet.model.entity.Item;
-import edu.icet.repository.ItemRepository;
 import org.example.Model.DTO.ItemDTO;
+import org.example.Model.Entity.Item;
+import org.example.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,6 @@ public class ItemService {
     @Autowired
     ItemRepository itemRepository;
 
-    //----------------------------------------Get All Item------------------------------------------>
     public ArrayList<ItemDTO> getAllItem() {
         List<Item> itemList = itemRepository.findAll();
         ArrayList<ItemDTO> itemDtos = new ArrayList<>();
@@ -34,20 +33,19 @@ public class ItemService {
         return itemDtos;
     }
 
-    //------------------------------------------Add Item--------------------------------------------------->
     public void addItem(ItemDTO itemDTO) {
         itemRepository.save(
                 new Item(
                         generateCustomerId(),
-                        itemDto.getName(),
-                        itemDto.getQty(),
-                        itemDto.getPrice(),
-                        itemDto.isAvailable(),
-                        itemDto.getImage()
+                        itemDTO.getName(),
+                        itemDTO.getQty(),
+                        itemDTO.getPrice(),
+                        itemDTO.isAvailable(),
+                        itemDTO.getImage()
                 )
         );
     }
-    //-------------------------------------Generate Item Id----------------------------------------------->
+
     public String generateCustomerId() {
         List<Item> itemList = itemRepository.findAll();
         if (itemList.isEmpty()) {
@@ -58,7 +56,6 @@ public class ItemService {
         return String.format("I%03d", lastNo);
     }
 
-    //---------------------------Update Item------------------------------------------------------------->
     public void upadateItem(ItemDTO itemDTO) {
         Item itemByName = itemRepository.findByName(itemDTO.getName());
         if (itemByName != null){
@@ -71,7 +68,6 @@ public class ItemService {
         }
     }
 
-    //--------------------Delete Item-------------------------------------------------------------------->
     public void deleteItem(String name) {
         itemRepository.delete(itemRepository.findByName(name));
     }
