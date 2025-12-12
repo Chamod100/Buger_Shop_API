@@ -1,7 +1,7 @@
 package org.example.controller;
 
-import edu.icet.service.OrderService;
 import org.example.Model.DTO.OrderDTO;
+import org.example.Service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
