@@ -1,16 +1,16 @@
 package org.example.Service;
 
-import edu.icet.model.entity.Customer;
-import edu.icet.model.entity.Item;
-import edu.icet.model.entity.Order;
-import edu.icet.model.entity.OrderDetails;
-import edu.icet.repository.CustomerRepository;
-import edu.icet.repository.ItemRepository;
-import edu.icet.repository.OrderDetailsRepository;
-import edu.icet.repository.OrderRepository;
 import jakarta.transaction.Transactional;
 import org.example.Model.DTO.OrderDTO;
 import org.example.Model.DTO.OrderDetailsDTO;
+import org.example.Model.Entity.Customer;
+import org.example.Model.Entity.Item;
+import org.example.Model.Entity.Order;
+import org.example.Model.Entity.OrderDetails;
+import org.example.repository.CustomerRepository;
+import org.example.repository.ItemRepository;
+import org.example.repository.OrderDetailsRepository;
+import org.example.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +55,7 @@ public class OrderService {
             item.setQty(item.getQty() - orderItem.getQty());
             itemRepository.save(item);
 
-            OrderDetails orderDetails = new OrderDetails();
+            OrderDetails orderDetails = new org.example.Model.Entity.OrderDetails();
             orderDetails.setOrder(order);
             orderDetails.setItem(item);
             orderDetails.setQty(orderItem.getQty());
@@ -63,7 +63,6 @@ public class OrderService {
         }
     }
 
-    //-------------------------------------Generate Order Id----------------------------------------------->
     public String generateOrderId() {
         List<Order> orderList = orderRepository.findAll();
         if (orderList.isEmpty()) {
