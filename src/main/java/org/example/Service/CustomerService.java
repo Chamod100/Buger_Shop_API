@@ -1,8 +1,8 @@
 package org.example.Service;
 
-import edu.icet.model.entity.Customer;
-import edu.icet.repository.CustomerRepository;
 import org.example.Model.DTO.CustomerDTO;
+import org.example.Model.Entity.Customer;
+import org.example.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class CustomerService {
 
     //------------------------------------------------Add Customer----------------------------------------->
     public void addCustomer(CustomerDTO customerDTO) {
-        customerRepository.save(new Customer(
+        customerRepository.save(new org.example.Model.Entity.Customer(
                 generateCustomerId(),
                 customerDTO.getTitle(),
                 customerDTO.getName(),
@@ -52,7 +52,7 @@ public class CustomerService {
 
     //--------------------------------------------Generate CustomerId-------------------------------------->
     public String generateCustomerId() {
-        List<Customer> customerList = customerRepository.findAll();
+        List<org.example.Model.Entity.Customer> customerList = customerRepository.findAll();
         if (customerList.isEmpty()) {
             return "C001";
         }
@@ -63,7 +63,7 @@ public class CustomerService {
 
     //-----------------------------------------Update Customer----------------------------------------------->
     public void updateCustomer(CustomerDTO customerDTO) {
-        Customer customer = customerRepository.findByNic(customerDTO.getNic());
+        org.example.Model.Entity.Customer customer = customerRepository.findByNic(customerDTO.getNic());
         if (customer != null){
             customer.setName(customerDTO.getName());
             customer.setDob(customerDTO.getDob());
@@ -78,7 +78,7 @@ public class CustomerService {
 
     //-----------------------------------------Delete Customer--------------------------------->
     public void deleteCustomer(String nic) {
-        Customer customer = customerRepository.findByNic(nic);
+        org.example.Model.Entity.Customer customer = customerRepository.findByNic(nic);
         if (customer != null) {
             customerRepository.delete(customer);
         }
